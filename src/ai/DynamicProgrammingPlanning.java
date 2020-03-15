@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * An implementation of a value based dynamic programming planning algorithm using the Bellman equation for Markov Decision Process
+ */
 public class DynamicProgrammingPlanning extends AI {
     private final HashMap<Character, Double> rewardPerElement = new HashMap<>();
     private final double DISCOUNT_FACTOR = 0.95;
@@ -24,12 +27,21 @@ public class DynamicProgrammingPlanning extends AI {
         this.rewardPerElement.put(' ', -1d);
     }
 
+    /**
+     * Create rewards and values matrix of the AI
+     *
+     * @param rows    number of rows
+     * @param columns number of columns
+     */
     @Override
     public void create(int rows, int columns) {
         this.rewards = new double[rows][columns];
         this.values = new double[rows][columns];
     }
 
+    /**
+     * Update the reward matrix of the AI depending on the game board
+     */
     @Override
     public void update(char[][] board) {
         for (int i = 0; i < board.length; i++) {
@@ -40,6 +52,13 @@ public class DynamicProgrammingPlanning extends AI {
         }
     }
 
+    /**
+     * Get the action of the AI
+     *
+     * @param snakeHeadPosition The position of the snake head
+     * @param allowedActions    The actions allowed by the game
+     * @return The chosen action of the AI
+     */
     @Override
     public char getAction(Position snakeHeadPosition, List<Character> allowedActions) {
         char action = ' ';
@@ -76,6 +95,9 @@ public class DynamicProgrammingPlanning extends AI {
         return action;
     }
 
+    /**
+     * Update the value matrix of the AI
+     */
     public void updateValues() {
         double delta = Double.MAX_VALUE;
 
@@ -90,6 +112,13 @@ public class DynamicProgrammingPlanning extends AI {
         }
     }
 
+    /**
+     * Get the maximum value around a certain position (North, South, West, East)
+     *
+     * @param row    The position row
+     * @param column The position column
+     * @return The maximum value
+     */
     public double getMaxValueAround(int row, int column) {
         double northValue = -Double.MAX_VALUE, southValue = -Double.MAX_VALUE, westValue = -Double.MAX_VALUE, eastValue = -Double.MAX_VALUE;
 

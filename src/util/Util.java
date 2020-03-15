@@ -1,6 +1,14 @@
 package util;
 
+/**
+ * A set of utilities functions
+ */
 public class Util {
+    /**
+     * Print a two dimensional array (double)
+     *
+     * @param array The array to print
+     */
     public static void printTwoDimArray(double[][] array) {
         System.out.println("**********");
         for (double[] row : array) {

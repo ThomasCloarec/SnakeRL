@@ -22,7 +22,6 @@ public class Game {
     private final List<View> viewObservers = new ArrayList<>();
     private List<Position> snake;
     private Position apple;
-    private int score;
     private AI AIObserver;
 
     /**
@@ -101,7 +100,6 @@ public class Game {
                     } else if (nextBoardSnakeHeadElement == 'B') {
                         episodeFinished = true;
                     } else if (nextBoardSnakeHeadElement == 'A') {
-                        score++;
                         this.board[this.snake.get(0).row][this.snake.get(0).column] = 'B';
                         this.snake.add(0, nextSnakeHeadPosition);
                         this.board[this.snake.get(0).row][this.snake.get(0).column] = 'H';
@@ -133,6 +131,12 @@ public class Game {
         }).start();
     }
 
+    /**
+     * Get the next position of the head of the snake if taking a particular action
+     *
+     * @param action An action performed by the snake
+     * @return The position of the head of the snake
+     */
     public Position getNextSnakeHeadPosition(char action) {
         Position nextSnakeHeadPosition = null;
 
@@ -153,8 +157,6 @@ public class Game {
      * Start a new episode of the training (one game iteration)
      */
     public void newEpisode() {
-        this.score = 0;
-
         for (int i = 0; i < this.board.length; i++) {
             for (int j = 0; j < this.board[0].length; j++) {
                 if (i == 0 || i == this.board.length - 1 || j == 0 || j == this.board[0].length - 1) {
@@ -216,6 +218,9 @@ public class Game {
         this.AIObserver = ai;
     }
 
+    /**
+     * Call the AI observer to update him
+     */
     public void updateAI() {
         this.AIObserver.update(this.board);
     }
