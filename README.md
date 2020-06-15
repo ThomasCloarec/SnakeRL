@@ -1,2 +1,2 @@
 # SnakeAI
-An implementation of several machine learning (or maybe some non-ML) algorithms for the game of snake.
+An implementation of dynamic programming with MDP (Markov Decision Process) applied to the game of snake.
